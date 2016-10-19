@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+
+
+<style>
+.bars {
+background-color: blue;
+width: 300px;
+height: 25px;
+margin: 10px 0 0 0;
+transition:width 1s ease-in;
+}
+#bar0 {
+width: 832px;
+}
+
+#bar1 {
+width: 777px;
+}
+
+#bar2 {
+width: 236px;
+}
+body {
+font-family: Helvetica;
+font-size: 16px;
+}
+.number {
+color: white;
+text-align: right;
+padding: 3px;
+font-size: 12px; 
+}
+#main
+{
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+overflow: auto;
+padding: 10px;
+margin-top: 10px;
+}
+.tooltip {
+    display:none;
+    background: beige;
+    font-size:14px;
+    height:25px;
+    border-radius: 5px;
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 0px;
+    color: black;
+    border: 1px solid black;
+  }
+
+
+</style>
+</head>
+<body>
+<h1> A Tale of Three Cities</h1>
+
+<form id="form1">
+<select id="sel" onChange="selMeasure()">
+  <option value="1">Population</option>
+  <option value="2">Housing Units</option>  
+  <option value="3">Households</option>  
+</select>
+</form>
+<div id="main">
+<div id="cat"></div>
+
+<div id="bar0" class="bars"><p id="bartext0" class="number">842</p></div>
+<div id="name0">Austin</div>
+
+<div id="bar1" class="bars"><p id="bartext1" class="number">777</p></div>
+<div id="name1">Fort Worth</div>
+
+<div id="bar2" class="bars"><p id="bartext2" class="number">236</p></div>
+<div id="name2">Lubbock</div>
+
+<script>
+var cities = [
+{name: "Austin", Population: 842},
+{name: "Fort Worth", Population: 777},
+{name: "Lubbock", Population: 236}
+];
+
+
+var cities = [
+{name: "Austin", Population: 842, Units: 354, Households: 322, tip: "live music capital"},
+{name: "Fort Worth", Population: 777, Units: 291, Households: 257, tip: "near Dallas"},
+{name: "Lubbock", Population: 236, Units: 95, Households: 86, tip: "TX Tech"}
+];
+
+function selMeasure() {
+var m = document.getElementById("sel").value;
+if (m == "1")
+{
+document.getElementById("cat").innerHTML = "<strong>" + "Population" + "</strong>";
+for (var i = 0; i<cities.length; i++) {
+    document.getElementById("bartext" + i).innerHTML= cities[i].Population;
+    document.getElementById("bar" + i).style.width = cities[i].Population/10 + "%";
+    
+    }; 
+} // end if
+
+else if (m == "2") {
+document.getElementById("cat").innerHTML = "<strong>" + "Housing Units" + "</strong>";
+for (var i = 0; i<cities.length; i++) {
+    document.getElementById("bartext" + i).innerHTML= cities[i].Units;
+    document.getElementById("bar" + i).style.width = cities[i].Units/10 + "%";
+    
+    };
+} // end else if
+
+
+else if (m == "3") {
+document.getElementById("cat").innerHTML = "<strong>" + "Households" + "</strong>";
+for (var i = 0; i<cities.length; i++) {
+    document.getElementById("bartext" + i).innerHTML= cities[i].Households;
+    document.getElementById("bar" + i).style.width = cities[i].Households/10 + "%";
+    
+    };
+} // end else if
+
+
+} // end function selMeasure
+
+
+
+
+document.getElementById("cat").innerHTML = "<strong>" + "Population" + "</strong>";
+for (var i = 0; i<cities.length; i++) {
+document.getElementById("name" + i).innerHTML= cities[i].name;
+document.getElementById("bartext" + i).innerHTML= cities[i].Population;
+document.getElementById("bar" + i).style.width = cities[i].Population/10 + "%";
+};
+
+
+
+for (var i = 0; i<cities.length; i++) {
+document.getElementById("name" + i).innerHTML= cities[i].name;
+document.getElementById("bartext" + i).innerHTML= cities[i].Population;
+document.getElementById("bar" + i).style.width = cities[i].Population/10 + "%";
+};
+
+
+$( document ).ready(function() {
+   $("[title]").tooltip({offset: [10, -30]});
+    });
+    
+
+</script>
+
+</div>
+
+</body>
+</html>
